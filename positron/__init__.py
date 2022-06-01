@@ -25,17 +25,23 @@ def create_debug_app(config: Union[dict, AltJSON]):
     c.run()
 
 def freeze(input_file, output, config:dict):
+    print("Freezing your app...")
+    print("Creating App Container...")
     f = Flask(config)
     shutil.copytree(os.path.dirname(os.path.abspath(__name__+".py")), output)
+    print("Collecting Positron Distutils...")
     if sys.platform != "win32":
         os.system("python3 -m pip install git+https://cordtech32/positron --target=floss_modules")
     else:
-        os.system("pip install git+https://cordtech32/positron --target=posi_modules")
+        os.system("pip install git+https://github.com/cordtech32/positron --target=posi_modules")
+    print("Reading Metadata...")
     with open("package.json") as js:
         pack = json.load(js)
 
     with open(input_file) as f:
         app = f.read()
+    
+    print("Creating Project...")
     
     with open(output+f"/{pack['entrypoint']}.py","w") as f:
         f.write(app)
@@ -72,4 +78,8 @@ struct = AltJSON(flask_app=app, flask_address="{pack['flask_host']}", name="{pac
 
 create_debug_app(struct)
             """)
+
+    print("Positron Distributable is now created!")
+    print("Happy Hacking :)")
+
     
