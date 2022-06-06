@@ -4,7 +4,7 @@ Using Positron.py, you can deploy your Flask Apps to Desktop-ready Apps in a mat
 
 ## Getting started with Positron
 
-### Simple (Debug) Apps
+### Simple Apps ("Debug Apps")
 
 Create a File in the same Directory as the Flask App, with the following Content:
 
